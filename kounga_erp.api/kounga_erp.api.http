@@ -1,0 +1,6 @@
+@kounga_erp.api_HostAddress = http://localhost:5064
+
+GET {{kounga_erp.api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
