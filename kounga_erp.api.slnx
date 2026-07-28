@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
+  <Project Path="kounga_erp.api.Application/kounga_erp.api.Application.csproj" />
+  <Project Path="kounga_erp.api.BuildingBlocks/kounga_erp.api.BuildingBlocks.csproj" />
+  <Project Path="kounga_erp.api.Domain/kounga_erp.api.Domain.csproj" />
+  <Project Path="kounga_erp.api.Infrastructure/kounga_erp.api.Infrastructure.csproj" />
+  <Project Path="kounga_erp.api/kounga_erp.api.csproj" />
+</Solution>
