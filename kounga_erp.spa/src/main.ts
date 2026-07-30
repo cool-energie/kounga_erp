@@ -3,15 +3,12 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-import vuetify from './vuetify.ts'
+import vuetify from './plugins/vuetify.ts'
 
 import 'unfonts.css'
 import axios from 'axios'
-import process from 'process'
 import { removeBearerToken, setBearerToken } from './helpers/functions.ts'
-
-console.log('import.meta.env.VITE_API_URL')
-console.log(import.meta.env.VITE_API_URL)
+import { authApi } from './modules/auth/authApi.ts'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 

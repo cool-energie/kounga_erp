@@ -1,8 +1,11 @@
 <script setup>
-import LogoutLink from '@/modules/auth/components/LogoutLink.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
+import { RouterView } from 'vue-router';
 
 </script>
 
 <template>
-    <LogoutLink />
+    <AppLayout>
+        <RouterView />
+    </AppLayout>
 </template>

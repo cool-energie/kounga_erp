@@ -21,6 +21,7 @@
     "vuetify": "^4.1.6"
   },
   "devDependencies": {
+    "@mdi/font": "^7.4.47",
     "@mdi/js": "^7.4.47",
     "@tsconfig/node24": "^24.0.4",
     "@types/node": "^24.13.3",
