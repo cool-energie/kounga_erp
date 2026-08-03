@@ -27,8 +27,6 @@ app.UseRouting();
 
 app.UseCors(MyAllowSpecificOrigins);
 
-app.UseAuthorization();
-
 app.UseHsts();
 
 app.UseHttpsRedirection();

@@ -1,4 +1,5 @@
-﻿using kounga_erp.api.Infrastructure.Data;
+﻿using kounga_erp.api.Domain.Models;
+using kounga_erp.api.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -18,6 +19,7 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("Database");
         services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
+        services.AddIdentity<User, Role>().AddEntityFrameworkStores<ApplicationDbContext>();
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>
         {
@@ -32,13 +34,14 @@ public static class DependencyInjection
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SigningKey"]!))
             };
         });
-        services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+        // services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
         return services;
     }
 
     public static WebApplication UseInfrastructureServices(this WebApplication app)
     {
-        app.MapIdentityApi<IdentityUser>();
+        app.UseAuthentication();
+        app.UseAuthorization();
         return app;
     }
 }
