@@ -1,4 +1,4 @@
-import authRoutes from '@/modules/auth/authRoutes'
+import authRoutes from '@/modules/account/authRoutes'
 import settingsRoutes from '@/modules/settings/settingsRoutes'
 import HomePage from '@/pages/HomePage.vue'
 import { createRouter, createWebHistory } from 'vue-router'

@@ -8,7 +8,7 @@ import vuetify from './plugins/vuetify.ts'
 import 'unfonts.css'
 import axios from 'axios'
 import { removeBearerToken, setBearerToken } from './helpers/functions.ts'
-import { authApi } from './modules/auth/authApi.ts'
+import { authApi } from './modules/account/authApi.ts'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
@@ -35,7 +35,7 @@ axios.interceptors.response.use(
   async (error) => {
     console.log(error)
     if (
-      router.currentRoute.value.name != 'login' &&
+      router.currentRoute.value.name != 'account.login' &&
       error.response &&
       error.response.status === 401
     ) {
@@ -54,12 +54,12 @@ axios.interceptors.response.use(
           console.error('Failed to refresh token. Redirecting to login.')
           // Optionally, you can clear tokens and redirect to login page
           removeBearerToken()
-          window.location.href = '/login' // Adjust the path as needed
+          window.location.href = '/account/login' // Adjust the path as needed
         }
       } else {
         // No refresh token available, redirect to login or handle accordingly
         console.error('No refresh token available. Redirecting to login.')
-        window.location.href = '/login' // Adjust the path as needed
+        window.location.href = '/account/login' // Adjust the path as needed
       }
     }
     return Promise.reject(error)
