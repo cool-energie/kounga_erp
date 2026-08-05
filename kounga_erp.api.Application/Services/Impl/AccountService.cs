@@ -14,7 +14,7 @@ public class AccountService(
 {    
     public async Task<IdentityResult> RegisterUserAsync(string email, string password, string firstName, string lastName, DateTime dateOfBirth, string phoneNumber)
     {
-        User user = new User
+            User user = new User
         {
             UserName = email,
             Email = email,
@@ -37,8 +37,8 @@ public class AccountService(
         }*/
 
         string token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-        string baseUrl = configuration["AppSettings:BaseUrl"]!;
-        string confirmationLink = $"{baseUrl}/api/account/confirm-email?userId={user.Id}&token={Uri.EscapeDataString(token)}";
+        string baseUrl = configuration["AppSettings:ClientBaseUrl"]!;
+        string confirmationLink = $"{baseUrl}/account/confirm-email?userId={user.Id}&token={Uri.EscapeDataString(token)}";
         await emailService.SendRegistrationConfirmationEmail(user.Email, user.FirstName!, confirmationLink);
 
 

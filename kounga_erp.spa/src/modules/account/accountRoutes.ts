@@ -1,5 +1,6 @@
 import LoginPage from '@/modules/account/pages/LoginPage.vue'
 import RegisterPage from '@/modules/account/pages/RegisterPage.vue'
+import ConfirmRegisterPage from '@/modules/account/pages/ConfirmRegisterPage.vue'
 
 const authRoutes = [
   {
@@ -11,6 +12,11 @@ const authRoutes = [
     path: '/account/register',
     name: 'account.register',
     component: RegisterPage,
+  },
+  {
+    path: '/account/confirm-register',
+    name: 'account.confirm-register',
+    component: ConfirmRegisterPage,
   },
 ]
 

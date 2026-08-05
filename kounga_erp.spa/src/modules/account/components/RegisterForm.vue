@@ -3,8 +3,9 @@ import { useTemplateRef } from 'vue';
 import { useRegister } from '../mutations/register'
 import { useFormProcessing } from '@/composables/formProcessing'
 
-const { process, model, loading, hasErrors } = useFormProcessing(useTemplateRef('form'), useRegister());
+const emit = defineEmits(['success']);
 
+const { process, model, loading, hasErrors } = useFormProcessing(useTemplateRef('form'), useRegister(), emit);
 </script>
 <template>
     <v-form ref="form">
