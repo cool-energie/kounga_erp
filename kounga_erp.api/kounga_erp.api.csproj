@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\kounga_erp.api.Application\kounga_erp.api.Application.csproj" />
     <ProjectReference Include="..\kounga_erp.api.Infrastructure\kounga_erp.api.Infrastructure.csproj" />
   </ItemGroup>
 

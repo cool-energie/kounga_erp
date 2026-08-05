@@ -1,14 +1,15 @@
 import { isValidEmail } from '@/helpers/utils'
 import type { Field } from '@/types/view/Field'
+import type { ViewModel } from '@/types/view/ViewModel'
 
-export default class RegisterModel {
+export default class RegisterModel implements ViewModel {
   FirstName: Field = { value: '', rules: [(v: unknown) => !!v || 'First name is required'] }
   LastName: Field = { value: '', rules: [] }
   Email: Field = {
     value: '',
     rules: [
       (v: unknown) => !!v || 'Email is required',
-      (v: unknown) => isValidEmail(v) || 'Invalid email format',
+      (v: unknown) => isValidEmail(String(v)) || 'Invalid email format',
     ],
   }
   PhoneNumber: Field = { value: '', rules: [] }

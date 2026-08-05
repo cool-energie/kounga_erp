@@ -6,7 +6,7 @@ namespace kounga_erp.api.Domain.Models;
 public class User : IdentityUser<long>, IEntity<long>
 {
     // Extended Columns
-    public string FistName { get; set; } = null!;
+    public string FirstName { get; set; } = null!;
     public string? LastName { get; set; }
     public DateTime? DateOfBirth { get; set; }
     public DateTime? LastLogin {  get; set; }

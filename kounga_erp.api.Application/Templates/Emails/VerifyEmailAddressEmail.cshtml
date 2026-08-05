@@ -1,0 +1,16 @@
+﻿@model kounga_erp.api.Application.Templates.Emails.RegistrationConfirmationEmailDTO
+@{
+    Layout = "_EmailLayout";
+}
+
+@section EmailContent {
+<div class="bg-body-tertiary p-3 rounded">
+    <h1>Verify Your Email Address</h1>
+    <p>Dear @Model.firstName,</p>
+    <p>Thank you for registering with our service. Please verify your email address by clicking the link below:</p>
+    <p><a href="@Model.confirmationLink">Verify Email Address</a></p>
+    <p>If you did not create an account, no further action is required.</p>
+    <p>Best regards,<br/>The Kounga ERP Team</p>
+</div>
+}
+
