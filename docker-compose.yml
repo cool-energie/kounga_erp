@@ -14,6 +14,10 @@ services:
   pgadmin:
      image: dpage/pgadmin4:9.8
 
+  mailpit:
+    image: axllent/mailpit
+
 volumes:
   postgresdb:
-  sqlserverdata:
+  sqlserverdata:  
+  mailpitdata:

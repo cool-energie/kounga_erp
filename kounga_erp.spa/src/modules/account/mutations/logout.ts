@@ -1,11 +1,11 @@
 import { defineMutation, useMutation } from '@pinia/colada'
-import { authApi } from '../authApi'
+import { accountApi } from '../accountApi'
 import { removeBearerToken } from '@/helpers/functions'
 
 export const useLogout = defineMutation(() => {
   const { mutate, ...mutation } = useMutation<void>({
     mutation: async () => {
-      const data = await authApi.logout()
+      const data = await accountApi.logout()
       removeBearerToken()
     },
   })

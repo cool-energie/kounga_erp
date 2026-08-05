@@ -2,8 +2,6 @@
 import { computed, useTemplateRef, watch, ref } from 'vue'
 import { useLogin } from '../mutations/login'
 
-const emit = defineEmits(['success', 'error', 'pending'])
-
 const email = ref('')
 const password = ref('')
 const { login, state, asyncStatus } = useLogin()
