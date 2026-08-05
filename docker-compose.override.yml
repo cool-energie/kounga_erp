@@ -4,7 +4,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
-      - ConnectionStrings__Database=Server=postgresdb;port=5432;Database=koungadb;User Id=postgres;Password=postgres;Include Error Detail=true
+      #- ConnectionStrings__Database=Server=postgresdb;port=5432;Database=koungadb;User Id=postgres;Password=postgres;Include Error Detail=true
+      - ConnectionStrings__Database=Server=sqlserver;Database=koungadb;User Id=sa;Password=!0<.8t0d35_M;;Encrypt=False;TrustServerCertificate=True;
     depends_on:
       - database
     ports:
@@ -27,6 +28,16 @@ services:
       - "5433:5432"
     volumes:
       - postgresdb:/var/lib/postgresql
+  
+  sqlserver:
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "!0<.8t0d35_M"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
 
   pgadmin:
     ports:

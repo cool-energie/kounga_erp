@@ -13,9 +13,9 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["kounga_erp.api/kounga_erp.api.csproj", "kounga_erp.api/"]
+COPY ["kounga_erp.api.Infrastructure/kounga_erp.api.Infrastructure.csproj", "kounga_erp.api.Infrastructure/"]
 COPY ["kounga_erp.api.Application/kounga_erp.api.Application.csproj", "kounga_erp.api.Application/"]
 COPY ["kounga_erp.api.Domain/kounga_erp.api.Domain.csproj", "kounga_erp.api.Domain/"]
-COPY ["kounga_erp.api.Infrastructure/kounga_erp.api.Infrastructure.csproj", "kounga_erp.api.Infrastructure/"]
 RUN dotnet restore "./kounga_erp.api/kounga_erp.api.csproj"
 COPY . .
 WORKDIR "/src/kounga_erp.api"

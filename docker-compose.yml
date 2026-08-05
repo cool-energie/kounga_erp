@@ -5,6 +5,9 @@ services:
       context: .
       dockerfile: kounga_erp.api/Dockerfile
 
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+
   database:
     image: postgres
 
@@ -13,3 +16,4 @@ services:
 
 volumes:
   postgresdb:
+  sqlserverdata:

@@ -2,9 +2,7 @@
 using kounga_erp.api.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,8 +16,11 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("Database");
-        services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
-        services.AddIdentity<User, Role>().AddEntityFrameworkStores<ApplicationDbContext>();
+        services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+        services
+            .AddIdentity<User, Role>().AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider);
+
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>
         {
