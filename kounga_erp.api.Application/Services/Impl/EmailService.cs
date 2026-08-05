@@ -66,7 +66,7 @@ internal class EmailService(IConfiguration configuration) : IEmailService
             }
 
             using var smtp = new SmtpClient();
-            await smtp.ConnectAsync("localhost", 1025);
+            await smtp.ConnectAsync("mailpit", 1025);
             await smtp.SendAsync(message);
             await smtp.DisconnectAsync(true);
         }

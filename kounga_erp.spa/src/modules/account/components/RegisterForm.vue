@@ -1,15 +1,9 @@
 <script setup>
-import { ref, useTemplateRef } from 'vue';
-import RegisterModel from '@/modules/account/viewModels/RegisterModel';
+import { useTemplateRef } from 'vue';
+import { useRegister } from '../mutations/register'
+import { useFormProcessing } from '@/composables/formProcessing'
 
-const model = ref(new RegisterModel());
-const form = useTemplateRef('form');
-
-function register() {
-    form.value.validate();
-    if (!form.value.isValid) return;
-    // Handle registration logic here
-}
+const { process, model, loading, hasErrors } = useFormProcessing(useTemplateRef('form'), useRegister());
 
 </script>
 <template>
@@ -50,6 +44,9 @@ function register() {
                     label="Date of Birth"></v-date-input>
             </v-col>
         </v-row>
-        <v-btn @click="register" block>Register</v-btn>
+        <v-btn @click="process" block :loading="loading">Register</v-btn>
+        <v-alert v-if="hasErrors" density="compact"
+            text="Une erreur est survenue veuillez verifiez les informations saisies." type="error"
+            class="mt-5"></v-alert>
     </v-form>
 </template>

@@ -8,7 +8,7 @@ import vuetify from './plugins/vuetify.ts'
 import 'unfonts.css'
 import axios from 'axios'
 import { removeBearerToken, setBearerToken } from './helpers/functions.ts'
-import { authApi } from './modules/account/authApi.ts'
+import { accountApi } from './modules/account/accountApi.ts'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
@@ -43,7 +43,7 @@ axios.interceptors.response.use(
       if (refreshToken) {
         try {
           localStorage.removeItem('refreshToken')
-          const { newAccessToken, newRefreshToken } = await authApi.refresh(refreshToken)
+          const { newAccessToken, newRefreshToken } = await accountApi.refresh(refreshToken)
           setBearerToken(newAccessToken, newRefreshToken)
           // Retry the original request with the new token
           const originalRequest = error.config

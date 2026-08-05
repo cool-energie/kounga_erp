@@ -5,7 +5,7 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       #- ConnectionStrings__Database=Server=postgresdb;port=5432;Database=koungadb;User Id=postgres;Password=postgres;Include Error Detail=true
-      - ConnectionStrings__Database=Server=sqlserver;Database=koungadb;User Id=sa;Password=!0<.8t0d35_M;;Encrypt=False;TrustServerCertificate=True;
+      - ConnectionStrings__Database=Server=sqlserver;Database=koungadb;User Id=sa;Password=!0<.8t0d35_M;Encrypt=False;TrustServerCertificate=True;
     depends_on:
       - database
     ports:
@@ -46,3 +46,17 @@ services:
       # Required by pgAdmin
       PGADMIN_DEFAULT_EMAIL: demo@example.com
       PGADMIN_DEFAULT_PASSWORD: secret
+
+  mailpit:
+    container_name: mailpit
+    restart: unless-stopped
+    volumes:
+        - mailpitdata:/data
+    ports:
+        - 8025:8025
+        - 1025:1025
+    environment:
+        MP_MAX_MESSAGES: 5000
+        MP_DATABASE: /data/mailpit.db
+        MP_SMTP_AUTH_ACCEPT_ANY: 1
+        MP_SMTP_AUTH_ALLOW_INSECURE: 1
