@@ -42,10 +42,11 @@ public class AccountController(IAccountService accountService) : ControllerBase
         return Results.InternalServerError();
     }
 
-    [HttpGet("confirm-email")]
-    public async Task<IResult> ConfirmEmail([FromQuery] Guid userId, [FromQuery] string token)
+    [HttpPost("confirm-email")]
+    public async Task<IResult> ConfirmEmail(IValidator<ConfirmEmailDTO> validator, [FromBody] ConfirmEmailDTO dto)
     {
-        var result = await accountService.ConfirmEmailAsync(userId, token);
+        await validator.ValidateAndThrowAsync(dto);
+        var result = await accountService.ConfirmEmailAsync(dto.userId, dto.token);
         if (result.Succeeded)
         {
             return Results.Ok();

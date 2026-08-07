@@ -49,9 +49,9 @@ public class AccountService(
         return IdentityResult.Success;
     }
 
-    public async Task<IdentityResult> ConfirmEmailAsync(Guid userId, string token)
+    public async Task<IdentityResult> ConfirmEmailAsync(long userId, string token)
     {
-        if(userId == Guid.Empty || string.IsNullOrEmpty(token))
+        if (userId <= 0 || string.IsNullOrEmpty(token))
         {
             return IdentityResult.Failed(new IdentityError { Description = "Invalid user ID or token." });
         }
@@ -62,10 +62,10 @@ public class AccountService(
             return IdentityResult.Failed(new IdentityError { Description = "User not found." });
         }
 
-        var decodedBytes = WebEncoders.Base64UrlDecode(token);
-        var decodedToken = Encoding.UTF8.GetString(decodedBytes);
+        /*var decodedBytes = WebEncoders.Base64UrlDecode(token);
+        var decodedToken = Encoding.UTF8.GetString(decodedBytes);*/
 
-        IdentityResult result = await userManager.ConfirmEmailAsync(user, decodedToken);
+        IdentityResult result = await userManager.ConfirmEmailAsync(user, token);
         return result;
     }
 

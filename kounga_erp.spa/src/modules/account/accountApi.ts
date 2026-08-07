@@ -6,6 +6,7 @@ const endpoints = {
   register: 'account/register',
   refresh: 'account/refresh',
   logout: 'account/logout',
+  confirmEmail: 'account/confirm-email',
 }
 
 export const accountApi = {
@@ -22,5 +23,9 @@ export const accountApi = {
   },
   async logout() {
     return await axios.post(endpoints.logout, {})
+  },
+  async confirmEmail(token: string, userId: string) {
+    const payload = await axios.post(endpoints.confirmEmail, { token, userId })
+    return payload.data
   },
 }

@@ -5,6 +5,7 @@ import Error404Page from '@/pages/Error404Page.vue'
 import Error401Page from '@/pages/Error401Page.vue'
 import Error500Page from '@/pages/Error500Page.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import accountRoutes from '@/modules/account/accountRoutes'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,7 +31,7 @@ const router = createRouter({
       name: '500',
       component: Error500Page,
     },
-    ...authRoutes,
+    ...accountRoutes,
     {
       path: '/:pathMatch(.*)*',
       redirect: '/404',
