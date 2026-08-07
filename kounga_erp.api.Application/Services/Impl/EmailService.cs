@@ -1,10 +1,12 @@
-﻿using MailKit.Net.Smtp;
+﻿using kounga_erp.api.Application.Abstracts;
+using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 
 namespace kounga_erp.api.Application.Services.Impl;
 
-internal class EmailService(IConfiguration configuration) : IEmailService
+[Injectable]
+public class EmailService(IConfiguration configuration) : IEmailService
 {
 
     public Task SendAccountCreatedEmail(string toEmail, string firstName, string loginLink)

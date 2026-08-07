@@ -2,6 +2,8 @@
 import { computed, useTemplateRef, watch, ref } from 'vue'
 import { useLogin } from '../mutations/login'
 
+const emit = defineEmits(['success', 'error', 'pending'])
+
 const email = ref('')
 const password = ref('')
 const { login, state, asyncStatus } = useLogin()
@@ -15,7 +17,7 @@ const validator = {
 const form = useTemplateRef('form')
 
 async function process() {
-    await form.value.validate()
+    await form.value.validate() 
     if (!form.value.isValid) return
     login({ email: email.value, password: password.value })
 }

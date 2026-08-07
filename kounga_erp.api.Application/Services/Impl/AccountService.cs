@@ -1,10 +1,12 @@
-﻿using kounga_erp.api.Domain.Models;
+﻿using kounga_erp.api.Application.Abstracts;
+using kounga_erp.api.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 
 
 namespace kounga_erp.api.Application.Services.Impl;
 
+[Injectable]
 public class AccountService(
         UserManager<User> userManager,
         SignInManager<User> signInManager,

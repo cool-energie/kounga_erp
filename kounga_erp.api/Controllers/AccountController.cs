@@ -1,7 +1,6 @@
-﻿using kounga_erp.api.Application.Services;
+﻿using FluentValidation;
+using kounga_erp.api.Application.Services;
 using kounga_erp.api.DTO;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace kounga_erp.api.Controllers;
@@ -22,8 +21,9 @@ public class AccountController(IAccountService accountService) : ControllerBase
     }*/
 
     [HttpPost("register")]
-    public async Task<IResult> Register(RegisterUserDto dto)
+    public async Task<IResult> Register(IValidator<RegisterUserDto> validator, [FromBody] RegisterUserDto dto)
     {
+        await validator.ValidateAndThrowAsync(dto);
         // Implementation for user registration
         var result = await accountService.RegisterUserAsync(
             dto.email,
@@ -39,6 +39,6 @@ public class AccountController(IAccountService accountService) : ControllerBase
             return Results.Ok();
         }
 
-        return Results.BadRequest();
+        return Results.InternalServerError();
     }
 }
