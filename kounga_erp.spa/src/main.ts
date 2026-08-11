@@ -9,6 +9,7 @@ import 'unfonts.css'
 import axios from 'axios'
 import { removeBearerToken, setBearerToken } from './helpers/functions.ts'
 import { accountApi } from './modules/account/accountApi.ts'
+import './assets/css/main.scss'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 

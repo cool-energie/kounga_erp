@@ -17,7 +17,7 @@ const validator = {
 const form = useTemplateRef('form')
 
 async function process() {
-    await form.value.validate() 
+    await form.value.validate()
     if (!form.value.isValid) return
     login({ email: email.value, password: password.value })
 }
@@ -29,7 +29,11 @@ watch(state, (value) => emit(value.status))
     <v-form ref="form">
         <v-text-field label="Adresse mail" v-model="email" :rules="validator.email"></v-text-field>
         <v-text-field label="Mot de passe" v-model="password" :rules="validator.password"></v-text-field>
-        <v-btn @click="process" :loading="loading">Connection</v-btn>
+        <v-btn @click="process" :loading="loading" block>Connection</v-btn>
+        <div class="d-flex ga-1 mt-2 text-label-medium"><span>You don't have an account yet? </span><router-link
+                :to="{ name: 'account.register' }">Register</router-link></div>
+        <div class="d-flex ga-1 mt-2 text-label-medium"><span>Have you forgotten your password? </span><router-link
+                :to="{ name: 'account.password-reset-request' }">Forgotten password</router-link></div>
         <v-alert v-if="hasErrors" density="compact"
             text="Une erreur est survenue veuillez verifiez les informations saisies." type="error"
             class="mt-5"></v-alert>

@@ -5,4 +5,17 @@ import { RouterView } from 'vue-router'
   <RouterView />
 </template>
 
-<style scoped></style>
+<style>
+@layer global, theme;
+
+@layer global {
+  :root {
+    --brand-blue: #65bdeb;
+  }
+
+  a :any-link {
+    color: var(--brand-blue);
+    font-weight: bold;
+  }
+}
+</style>

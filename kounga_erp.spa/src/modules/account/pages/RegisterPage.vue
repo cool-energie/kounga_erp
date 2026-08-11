@@ -12,7 +12,8 @@ function onRegisterSuccess() {
 
 </script>
 <template>
-    <AccountLayout width="800px" title="Register">
+    <AccountLayout title="Welcome to Our Platform!"
+        text="Join us today and start your journey with our amazing services.">
         <RegisterForm @success="onRegisterSuccess" />
     </AccountLayout>
 </template>

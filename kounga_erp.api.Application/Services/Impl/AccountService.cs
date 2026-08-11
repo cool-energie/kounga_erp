@@ -16,6 +16,15 @@ public class AccountService(
         IConfiguration configuration
     ) : IAccountService
 {
+   /* public async Task<SignInResult> LoginUserAsync(string email, string password, bool rememberMe)
+    {
+        var user = await userManager.FindByEmailAsync(email);
+
+        if (user == null) return SignInResult.Failed;
+        if (!await userManager.IsEmailConfirmedAsync(user)) return SignInResult.NotAllowed;
+        var result = await signInManager.PasswordSignInAsync(user.UserName, password, rememberMe, true);
+    }*/
+
     public async Task<IdentityResult> RegisterUserAsync(string email, string password, string firstName, string lastName, DateTime dateOfBirth, string phoneNumber)
     {
             User user = new User
@@ -61,9 +70,6 @@ public class AccountService(
         {
             return IdentityResult.Failed(new IdentityError { Description = "User not found." });
         }
-
-        /*var decodedBytes = WebEncoders.Base64UrlDecode(token);
-        var decodedToken = Encoding.UTF8.GetString(decodedBytes);*/
 
         IdentityResult result = await userManager.ConfirmEmailAsync(user, token);
         return result;

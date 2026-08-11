@@ -2,7 +2,7 @@ import axios from 'axios'
 import type { RegisterModelValues } from './viewModels/RegisterModel'
 
 const endpoints = {
-  login: 'account/login',
+  login: 'login',
   register: 'account/register',
   refresh: 'account/refresh',
   logout: 'account/logout',
