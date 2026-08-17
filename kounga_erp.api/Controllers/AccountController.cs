@@ -1,15 +1,17 @@
 ﻿using FluentValidation;
 using kounga_erp.api.Application.Services;
+using kounga_erp.api.Domain.Models;
 using kounga_erp.api.DTO;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace kounga_erp.api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class AccountController(IAccountService accountService) : ControllerBase
+public class AccountController(IAccountService accountService, SignInManager<User> signInManager) : ControllerBase
 {
-   /* [HttpPost("logout")]
+    [HttpPost("logout")]
     public async Task<IResult> logout([FromBody] object empty) 
     {
         if (empty != null)
@@ -18,7 +20,7 @@ public class AccountController(IAccountService accountService) : ControllerBase
             return Results.Ok();
         }
         return Results.Unauthorized();
-    }*/
+    }
 
     [HttpPost("register")]
     public async Task<IResult> Register(IValidator<RegisterUserDto> validator, [FromBody] RegisterUserDto dto)

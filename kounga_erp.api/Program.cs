@@ -18,8 +18,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 
 builder.Services
-    .AddInfrastructureServices(builder.Configuration)
     .AddApplicationServices(builder.Configuration)
+    .AddInfrastructureServices(builder.Configuration)
     .AddApiServices(builder.Configuration);
 
 var app = builder.Build();

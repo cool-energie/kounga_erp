@@ -1,5 +1,5 @@
 import type { Mutation } from '@/types/Mutation'
-import { computed, watch, type Ref, type TemplateRef } from 'vue'
+import { computed, watch, type TemplateRef } from 'vue'
 
 export function useFormProcessing(
   form: TemplateRef<HTMLFormElement>,
@@ -7,8 +7,6 @@ export function useFormProcessing(
   emit: any,
 ) {
   const validateForm = async () => {
-    console.log('Validating form...')
-    console.log(form.value)
     if (!form.value) return false
     await form.value.validate()
     return form.value.isValid

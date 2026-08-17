@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import NotificationsAppBarMenu from '@/components/NotificationsAppBarMenu.vue';
 import LabeledListItem from '@/components/ui/LabeledListItem.vue';
+import LogoutLink from '@/modules/account/components/LogoutLink.vue';
 import { RouterView } from 'vue-router';
 
 const appItems = [
@@ -32,7 +33,7 @@ const appItems = [
     <v-layout class="rounded rounded-md border">
         <v-app-bar>
             <template #title>
-                <v-img src="/public/img/logo-remetu.png" width="150px" />
+                <v-img src="/img/logo-remetu.png" width="150px" />
             </template>
             <template #append>
                 <div>
@@ -46,6 +47,13 @@ const appItems = [
                 <v-list-item><v-icon>mdi-apps</v-icon></v-list-item>
                 <labeled-list-item v-for="item in appItems" :key="item.label" :icon="item.icon" :label="item.label"
                     :to="item.to" />
+            </v-list>
+            <v-list nav>
+                <v-list-item>
+                    <LogoutLink>
+                        <v-icon>mdi-logout</v-icon>
+                    </LogoutLink>
+                </v-list-item>
             </v-list>
         </v-navigation-drawer>
 

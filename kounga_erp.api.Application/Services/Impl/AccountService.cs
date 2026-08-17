@@ -1,9 +1,11 @@
 ﻿using kounga_erp.api.Application.Abstracts;
 using kounga_erp.api.Domain.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Text;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 
 namespace kounga_erp.api.Application.Services.Impl;
@@ -16,14 +18,18 @@ public class AccountService(
         IConfiguration configuration
     ) : IAccountService
 {
-   /* public async Task<SignInResult> LoginUserAsync(string email, string password, bool rememberMe)
-    {
-        var user = await userManager.FindByEmailAsync(email);
+/*
+     public async Task<SignInResult> LoginUserAsync(string email, string password, bool rememberMe)
+     {
+         var user = await userManager.FindByEmailAsync(email);
 
-        if (user == null) return SignInResult.Failed;
-        if (!await userManager.IsEmailConfirmedAsync(user)) return SignInResult.NotAllowed;
-        var result = await signInManager.PasswordSignInAsync(user.UserName, password, rememberMe, true);
-    }*/
+         if (user == null) return SignInResult.Failed;
+        var result = await signInManager.PasswordSignInAsync(user.UserName, password, rememberMe, false);
+        if (result.Succeeded) return SignInResult.Success;
+        if(result.IsLockedOut) return SignInResult.LockedOut;
+        if (result.RequiresTwoFactor) return SignInResult.TwoFactorRequired;
+//        if(res)
+     }*/
 
     public async Task<IdentityResult> RegisterUserAsync(string email, string password, string firstName, string lastName, DateTime dateOfBirth, string phoneNumber)
     {
@@ -52,7 +58,7 @@ public class AccountService(
         string token = await userManager.GenerateEmailConfirmationTokenAsync(user);
         string baseUrl = configuration["AppSettings:ClientBaseUrl"]!;
         string confirmationLink = $"{baseUrl}/account/confirm-email?userId={user.Id}&token={Uri.EscapeDataString(token)}";
-        await emailService.SendRegistrationConfirmationEmail(user.Email, user.FirstName!, confirmationLink);
+        await emailService.SendAccountCreatedEmail(user.Email, user.FirstName!, confirmationLink);
 
 
         return IdentityResult.Success;

@@ -60,6 +60,10 @@ const vuetify = createVuetify({
     },
     VDateInput: {
       ...defaultFormFieldOptions,
+      inputFormat: 'dd/mm/yyyy',
+      placeholder: 'dd/mm/yyyy',
+      prependIcon: '',
+      prependInnerIcon: '$calendar',
     },
     VCard: {
       tile: true,

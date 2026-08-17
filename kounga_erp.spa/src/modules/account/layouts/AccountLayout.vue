@@ -13,7 +13,7 @@ const props = defineProps(["width", "title", "text"])
                 <p class="text-subtitle-1 text-white">{{ text }}
                 </p>
             </div>
-            <div class="w-50 d-flex flex-column justify-center align-strech pr-5">
+            <div class="w-50 d-flex flex-column justify-center align-strech pr-5 py-5">
                 <slot />
             </div>
         </v-card>

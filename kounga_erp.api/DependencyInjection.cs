@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using kounga_erp.api.Domain.Models;
 using kounga_erp.api.DTO;
 using kounga_erp.api.Exceptions;
 
@@ -17,7 +18,7 @@ public static class DependencyInjection
     public static WebApplication UseApiServices(this WebApplication app)
     {
         app.UseExceptionHandler(options => { });
-
+        //app.MapIdentityApi<User>();
         return app;
     }
 }
