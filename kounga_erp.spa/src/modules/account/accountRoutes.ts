@@ -4,11 +4,10 @@ import ConfirmRegisterPage from '@/modules/account/pages/ConfirmRegisterPage.vue
 import EmailConfirmedPage from '@/modules/account/pages/EmailConfirmedPage.vue'
 import PasswordResetRequestPage from '@/modules/account/pages/PasswordResetRequestPage.vue'
 import PasswordResetPage from '@/modules/account/pages/PasswordResetPage.vue'
-import EmailConfirmationFailedPage from '@/modules/account/pages/EmailConfirmationFailedPage.vue'
+import ResendConfirmationEmailPage from '@/modules/account/pages/ResendConfirmationEmailPage.vue'
 import { accountApi } from './accountApi'
 import { isConnected } from '@/helpers/functions'
 import { useRootStore } from '@/stores/rootStore'
-import { ErrorException } from '@/types/Exception'
 
 const accountRoutes = [
   {
@@ -45,6 +44,11 @@ const accountRoutes = [
         path: 'password-reset',
         name: 'account.password-reset',
         component: PasswordResetPage,
+      },
+      {
+        path: 'resend-confirm-email',
+        name: 'account.resend-confirm-email',
+        component: ResendConfirmationEmailPage,
       },
       /*{
         path: 'email-confirmation-failed',

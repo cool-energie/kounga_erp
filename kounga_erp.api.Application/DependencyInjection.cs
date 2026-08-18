@@ -20,5 +20,5 @@ public static class DependencyInjection
         //services.AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider);
 
         return services;
-    }
+    }   
 }

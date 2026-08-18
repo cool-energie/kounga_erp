@@ -24,6 +24,8 @@ internal class ApplicationDbContext : IdentityDbContext<User, Role, long>, IAppl
         builder.Entity<IdentityUserLogin<long>>(entity => entity.ToTable("UserLogins"));
         builder.Entity<IdentityUserToken<long>>(entity => entity.ToTable("UserTokens"));
         builder.Entity<IdentityRoleClaim<long>>(entity => entity.ToTable("RoleClaims"));
+        // Configure claimtype view
+        builder.Entity<ClaimType>(entity => entity.HasNoKey().ToView("ClaimsTypesView"));
     }
 
     public DbSet<Address> Addresses { get; set; }

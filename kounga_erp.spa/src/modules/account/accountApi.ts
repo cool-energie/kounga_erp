@@ -5,17 +5,18 @@ import type { ResetPasswordRequestModelValues } from './viewModels/ResetPassword
 import type { PasswordResetModelValues } from './viewModels/PasswordResetModel'
 import AccountNotFoundException from '@/modules/account/exceptions/AccountNotFoundException'
 import EmailNotVerifiedException from './exceptions/EmailNotVerifiedException'
-import { ErrorException, Exception, InformationalException } from '@/types/Exception'
+import { ErrorException } from '@/types/Exception'
 import InvalidTokenException from './exceptions/InvalidTokenException'
 
 const endpoints = {
   login: 'login',
   register: 'account/register',
-  refresh: 'account/refresh',
+  refresh: 'refresh',
   logout: 'account/logout',
   confirmEmail: 'account/confirm-email',
   sendResetPasswordRequest: 'forgotPassword',
   resetPassword: 'resetPassword',
+  resendConfirmEmail: 'account/resend-confirm-email',
 }
 
 export const accountApi = {
@@ -46,20 +47,8 @@ export const accountApi = {
     })
   },
   async refresh(refreshToken: string) {
-    let data
-    await axios
-      .post(endpoints.refresh, { refreshToken })
-      .then((response) => (data = response.data))
-      .catch((error) => {
-        const response = error.response
-        if (Array.isArray(response)) {
-          response.forEach((err) => {
-            if (err.code === 'InvalidToken') throw new InvalidTokenException()
-            else throw new ErrorException()
-          })
-        }
-      })
-    return data
+    const payload = await axios.post(endpoints.refresh, { refreshToken })
+    return payload.data
   },
   async logout() {
     return await axios.post(endpoints.logout, {}).catch(() => {
@@ -81,6 +70,9 @@ export const accountApi = {
   },
   async sendResetPasswordRequest(model: ResetPasswordRequestModelValues) {
     return await axios.post(endpoints.sendResetPasswordRequest, { email: model.Email })
+  },
+  async resendConfirmEmail(model: ResetPasswordRequestModelValues) {
+    return await axios.post(endpoints.resendConfirmEmail, { email: model.Email })
   },
   async resetPassword(model: PasswordResetModelValues) {
     return await axios.post(endpoints.resetPassword, {

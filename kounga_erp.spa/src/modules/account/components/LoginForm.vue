@@ -22,6 +22,6 @@ const { process, model, loading } = useFormProcessing(useTemplateRef('form'), us
         <div class="d-flex ga-1 mt-2 text-label-medium"><span>Have you forgotten your password? </span><router-link
                 :to="{ name: 'account.password-reset-request' }">Forgotten password</router-link></div>
         <div class="d-flex ga-1 mt-2 text-label-medium"><span>Your email address is not verified? </span><router-link
-                :to="{ name: 'account.resend-confirmation-email ' }">resend the confirmation link</router-link></div>
+                :to="{ name: 'account.resend-confirm-email' }">resend the confirmation link</router-link></div>
     </v-form>
 </template>

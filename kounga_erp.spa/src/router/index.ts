@@ -21,28 +21,26 @@ const router = createRouter({
         }
         next()
       },
-      children: [
-        ...settingsRoutes,
-        {
-          path: '/404',
-          name: '404',
-          component: Error404Page,
-        },
-        {
-          path: '/401',
-          name: '401',
-          component: Error401Page,
-        },
-        {
-          path: '/500',
-          name: '500',
-          component: Error500Page,
-        },
-        {
-          path: '/:pathMatch(.*)*',
-          redirect: '/404',
-        },
-      ],
+    },
+    ...settingsRoutes,
+    {
+      path: '/404',
+      name: '404',
+      component: Error404Page,
+    },
+    {
+      path: '/401',
+      name: '401',
+      component: Error401Page,
+    },
+    {
+      path: '/500',
+      name: '500',
+      component: Error500Page,
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/404',
     },
     ...accountRoutes,
   ],

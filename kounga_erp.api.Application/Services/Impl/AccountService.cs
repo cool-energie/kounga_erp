@@ -50,17 +50,12 @@ public class AccountService(
             return result;
         }
 
-      /*  IdentityResult roleAssignmentResult = await userManager.AddToRoleAsync(user, "User");
-        if (!roleAssignmentResult.Succeeded) {
-            return roleAssignmentResult;
-        }*/
+        /*  IdentityResult roleAssignmentResult = await userManager.AddToRoleAsync(user, "User");
+          if (!roleAssignmentResult.Succeeded) {
+              return roleAssignmentResult;
+          }*/
 
-        string token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-        string baseUrl = configuration["AppSettings:ClientBaseUrl"]!;
-        string confirmationLink = $"{baseUrl}/account/confirm-email?userId={user.Id}&token={Uri.EscapeDataString(token)}";
-        await emailService.SendAccountCreatedEmail(user.Email, user.FirstName!, confirmationLink);
-
-
+        await sendConfirmEmailAsync(user);
         return IdentityResult.Success;
     }
 
@@ -79,6 +74,20 @@ public class AccountService(
 
         IdentityResult result = await userManager.ConfirmEmailAsync(user, token);
         return result;
+    }
+
+    public async Task sendConfirmEmailAsync(User user)
+    {
+        string token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+        string baseUrl = configuration["AppSettings:ClientBaseUrl"]!;
+        string confirmationLink = $"{baseUrl}/account/confirm-email?userId={user.Id}&token={Uri.EscapeDataString(token)}";
+        await emailService.SendAccountCreatedEmail(user.Email, user.FirstName!, confirmationLink);
+    }
+
+    public async Task sendConfirmEmailAsync(string email)
+    {
+        User user = await userManager.FindByEmailAsync(email);
+        await sendConfirmEmailAsync(user);
     }
 
 }

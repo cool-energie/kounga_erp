@@ -55,4 +55,12 @@ public class AccountController(IAccountService accountService, SignInManager<Use
         }
         return Results.BadRequest(result.Errors);
     }
+
+    [HttpPost("resend-confirm-email")]
+    public async Task<IResult> SendConfirmEmail(IValidator<SendConfirmEmailDto> validator, [FromBody] SendConfirmEmailDto dto)
+    {
+        await validator.ValidateAndThrowAsync(dto);
+        await accountService.sendConfirmEmailAsync(dto.email);
+        return Results.Ok();
+    }
 }

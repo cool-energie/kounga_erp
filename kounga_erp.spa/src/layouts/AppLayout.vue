@@ -42,21 +42,6 @@ const appItems = [
             </template>
         </v-app-bar>
 
-        <v-navigation-drawer permanent rail>
-            <v-list nav>
-                <v-list-item><v-icon>mdi-apps</v-icon></v-list-item>
-                <labeled-list-item v-for="item in appItems" :key="item.label" :icon="item.icon" :label="item.label"
-                    :to="item.to" />
-            </v-list>
-            <v-list nav>
-                <v-list-item>
-                    <LogoutLink>
-                        <v-icon>mdi-logout</v-icon>
-                    </LogoutLink>
-                </v-list-item>
-            </v-list>
-        </v-navigation-drawer>
-
         <v-main class="d-flex align-center justify-center">
             <v-container fluid class="pa-0">
                 <RouterView />
