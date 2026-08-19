@@ -1,11 +1,4 @@
-﻿using FluentValidation;
-using kounga_erp.api.Application.Services;
-using kounga_erp.api.Domain.Models;
-using kounga_erp.api.DTO;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
-namespace kounga_erp.api.Controllers;
+﻿namespace kounga_erp.api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -23,7 +16,7 @@ public class AccountController(IAccountService accountService, SignInManager<Use
     }
 
     [HttpPost("register")]
-    public async Task<IResult> Register(IValidator<RegisterUserDto> validator, [FromBody] RegisterUserDto dto)
+    public async Task<IResult> Register(IValidator<RegisterUserDTO> validator, [FromBody] RegisterUserDTO dto)
     {
         await validator.ValidateAndThrowAsync(dto);
         // Implementation for user registration
@@ -57,7 +50,7 @@ public class AccountController(IAccountService accountService, SignInManager<Use
     }
 
     [HttpPost("resend-confirm-email")]
-    public async Task<IResult> SendConfirmEmail(IValidator<SendConfirmEmailDto> validator, [FromBody] SendConfirmEmailDto dto)
+    public async Task<IResult> SendConfirmEmail(IValidator<SendConfirmEmailDTO> validator, [FromBody] SendConfirmEmailDTO dto)
     {
         await validator.ValidateAndThrowAsync(dto);
         await accountService.sendConfirmEmailAsync(dto.email);

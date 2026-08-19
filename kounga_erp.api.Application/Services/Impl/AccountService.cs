@@ -1,6 +1,4 @@
-﻿using kounga_erp.api.Application.Abstracts;
-using kounga_erp.api.Domain.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

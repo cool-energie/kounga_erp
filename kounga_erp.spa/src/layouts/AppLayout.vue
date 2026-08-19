@@ -33,7 +33,9 @@ const appItems = [
     <v-layout class="rounded rounded-md border">
         <v-app-bar>
             <template #title>
-                <v-img src="/img/logo-remetu.png" width="150px" />
+                <RouterLink :to="{ name: 'home' }">
+                    <v-img src="/img/logo-remetu.png" width="150px" />
+                </RouterLink>
             </template>
             <template #append>
                 <div>
@@ -44,7 +46,7 @@ const appItems = [
 
         <v-main class="d-flex align-center justify-center">
             <v-container fluid class="pa-0">
-                <RouterView />
+                <slot />
             </v-container>
         </v-main>
     </v-layout>

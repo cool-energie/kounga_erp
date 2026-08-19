@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace kounga_erp.api.Domain.Models;
 
-public class Role : IdentityRole<long>, IEntity<long>
+public class Role : IdentityRole<long>, IEntity
 {
     // Extended Columns
     public string? Description { get; set; }

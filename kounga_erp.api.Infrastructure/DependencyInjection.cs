@@ -1,5 +1,7 @@
-﻿using kounga_erp.api.Domain.Models;
+﻿using kounga_erp.api.Application.Abstracts;
+using kounga_erp.api.Domain.Models;
 using kounga_erp.api.Infrastructure.Data;
+using kounga_erp.api.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -51,6 +53,8 @@ public static class DependencyInjection
         });
 
         //services.AddIdentityApiEndpoints<User>();
+        //services.AddScoped<ApplicationDbContext>();
+        services.AddScoped<IUserRepository, UserRepository>();
         return services;
     }
 

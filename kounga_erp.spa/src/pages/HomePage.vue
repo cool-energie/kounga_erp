@@ -3,7 +3,7 @@ const modules = [
     {
         name: 'Users',
         icon: 'mdi-card-account-details',
-        path: "/users",
+        path: "/security",
         color: "#90A4AE"
     },
     {

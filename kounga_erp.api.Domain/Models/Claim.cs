@@ -2,7 +2,7 @@
 
 namespace kounga_erp.api.Domain.Models;
 
-public class Claim : Entity<long>
+public class Claim : Entity
 {
     public string Name { get; set; }
 }

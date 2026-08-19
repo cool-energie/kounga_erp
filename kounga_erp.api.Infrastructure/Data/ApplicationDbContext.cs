@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 
 namespace kounga_erp.api.Infrastructure.Data;
-internal class ApplicationDbContext : IdentityDbContext<User, Role, long>, IApplicationDbContext
+public class ApplicationDbContext : IdentityDbContext<User, Role, long>, IApplicationDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -29,4 +29,5 @@ internal class ApplicationDbContext : IdentityDbContext<User, Role, long>, IAppl
     }
 
     public DbSet<Address> Addresses { get; set; }
+    public DbSet<User> users { get; set; }
 }

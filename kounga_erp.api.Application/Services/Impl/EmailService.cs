@@ -1,5 +1,4 @@
-﻿using kounga_erp.api.Application.Abstracts;
-using MailKit.Net.Smtp;
+﻿using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using MimeKit;

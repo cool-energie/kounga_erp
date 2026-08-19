@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 namespace kounga_erp.api.DTO;
 
-public record RegisterUserDto(string email, string password, string firstName,  string lastName, string dateOfBirth, string phoneNumber);
+public record RegisterUserDTO(string email, string password, string firstName,  string lastName, string dateOfBirth, string phoneNumber);
 
-public class RegisterUserDtoValidator : AbstractValidator<RegisterUserDto>
+public class RegisterUserDTOValidator : AbstractValidator<RegisterUserDTO>
 {
-    public RegisterUserDtoValidator()
+    public RegisterUserDTOValidator()
     {
         RuleFor(x => x.email).NotEmpty().WithMessage("Email is required");
         RuleFor(x => x.password).NotEmpty().WithMessage("Password is required");

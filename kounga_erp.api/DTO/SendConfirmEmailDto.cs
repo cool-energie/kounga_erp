@@ -1,10 +1,8 @@
-﻿using FluentValidation;
+﻿namespace kounga_erp.api.DTO;
 
-namespace kounga_erp.api.DTO;
+public record SendConfirmEmailDTO(string email);
 
-public record SendConfirmEmailDto(string email);
-
-public class SendConfirmEmailValidator : AbstractValidator<SendConfirmEmailDto>
+public class SendConfirmEmailValidator : AbstractValidator<SendConfirmEmailDTO>
 {
     public SendConfirmEmailValidator()
     {

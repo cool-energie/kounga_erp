@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace kounga_erp.api.Domain.Models;
 
-public class Address : Entity<long>
+public class Address : Entity
 {
 
     // Foreign Key to User
