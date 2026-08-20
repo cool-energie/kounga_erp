@@ -1,12 +1,12 @@
 ﻿namespace kounga_erp.api.Domain.Abstractions;
 
-public interface IEntity<T> : IEntity
+public interface IEntity : IEntity<long>
 {
-    public T Id { get; set; }
 }
 
-public interface IEntity
+public interface IEntity<T>
 {
+    public T Id { get; set; }
     public DateTime? CreatedAt { get; set; }
     public string? CreatedBy { get; set; }
     public DateTime? LastModified { get; set; }

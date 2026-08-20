@@ -9,6 +9,8 @@ import 'unfonts.css'
 import axios from 'axios'
 import { removeBearerToken, setBearerToken } from './helpers/functions.ts'
 import { accountApi } from './modules/account/accountApi.ts'
+import './assets/css/main.scss'
+import { useRootStore } from './stores/rootStore.ts'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
@@ -33,7 +35,6 @@ axios.interceptors.response.use(
     return response
   },
   async (error) => {
-    console.log(error)
     if (
       router.currentRoute.value.name != 'account.login' &&
       error.response &&
@@ -51,8 +52,10 @@ axios.interceptors.response.use(
           return axios(originalRequest)
         } catch (exception) {
           // If refreshing fails, redirect to login or handle accordingly
-          console.error('Failed to refresh token. Redirecting to login.')
+          //console.error('Failed to refresh token. Redirecting to login.')
           // Optionally, you can clear tokens and redirect to login page
+          const { showErrorSnackbar } = useRootStore()
+          showErrorSnackbar('Your session has expired.')
           removeBearerToken()
           window.location.href = '/account/login' // Adjust the path as needed
         }

@@ -1,5 +1,6 @@
 using kounga_erp.api.Infrastructure;
 using kounga_erp.api.Application;
+using kounga_erp.api;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -17,8 +18,9 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 
 builder.Services
+    .AddApplicationServices(builder.Configuration)
     .AddInfrastructureServices(builder.Configuration)
-    .AddApplicationServices(builder.Configuration);
+    .AddApiServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -36,5 +38,6 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.UseInfrastructureServices();
+app.UseApiServices();
 
 app.Run();

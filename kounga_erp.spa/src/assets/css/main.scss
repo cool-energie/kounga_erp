@@ -1,0 +1,24 @@
+@layer global, theme;
+@layer global {
+  :root {
+    --brand-blue: #65bdeb;
+    --brand-dark-blue: #1280c4;
+    --linear-transition: all 0.3s linear;
+  }
+
+  * {
+    transition: var(--linear-transition);
+  }
+
+  a {
+    &:any-link {
+      color: var(--brand-dark-blue);
+      text-decoration: none;
+    }
+
+    &:hover,
+    &:active {
+      color: var(--brand-blue);
+    }
+  }
+}

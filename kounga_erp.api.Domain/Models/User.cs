@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace kounga_erp.api.Domain.Models;
 
-public class User : IdentityUser<long>, IEntity<long>
+public class User : IdentityUser<long>, IEntity
 {
     // Extended Columns
     public string FirstName { get; set; } = null!;

@@ -6,9 +6,11 @@ import { watch } from 'vue'
 const router = useRouter()
 const { logout, state } = useLogout()
 watch(state, (value) => {
-    if (value.status == "success") router.push({ name: 'login' })
+    if (value.status == "success") router.push({ name: 'account.login' })
 })
 </script>
 <template>
-    <a href="#" @click="logout">logout</a>
+    <a href="#" @click="logout">
+        <slot />
+    </a>
 </template>

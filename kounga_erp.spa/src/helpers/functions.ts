@@ -1,6 +1,8 @@
-export function setBearerToken(accessToken: string, refreshToken: string) {
-  localStorage.setItem('accessToken', accessToken)
-  localStorage.setItem('refreshToken', refreshToken)
+import type { BearerToken } from '@/types/BearerToken'
+
+export function setBearerToken(bearerToken: BearerToken) {
+  localStorage.setItem('accessToken', bearerToken.accessToken)
+  localStorage.setItem('refreshToken', bearerToken.refreshToken)
 }
 
 export function removeBearerToken() {

@@ -1,28 +1,29 @@
 ﻿using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 
 namespace kounga_erp.api.Application.Services.Impl;
 
-internal class EmailService(IConfiguration configuration) : IEmailService
+[Injectable]
+public class EmailService(IConfiguration configuration) : IEmailService, IEmailSender
 {
 
-    public Task SendAccountCreatedEmail(string toEmail, string firstName, string loginLink)
+
+    public async Task SendEmailAsync(string email, string subject, string htmlMessage)
     {
-        throw new NotImplementedException();
+        await SendEmailAsync(email, "", subject, htmlMessage, true);
     }
 
-    public async Task SendRegistrationConfirmationEmail(string toEmail, string firstName, string confirmationLink)
+    public async Task SendAccountCreatedEmail(string toEmail, string firstName, string confirmationLink)
     {
         string html = $"""            
-            <div class="bg-body-tertiary p-3 rounded">
-                <h1>Verify Your Email Address</h1>
-                <p>Dear {firstName},</p>
-                <p>Thank you for registering with our service. Please verify your email address by clicking the link below:</p>
-                <p><a href="{confirmationLink}">Verify Email Address</a></p>
-                <p>If you did not create an account, no further action is required.</p>
-                <p>Best regards,<br/>The Kounga ERP Team</p>
-            </div>
+            <h1>Verify Your Email Address</h1>
+            <p>Dear {firstName},</p>
+            <p>Thank you for registering with our service. Please verify your email address by clicking the link below:</p>
+            <p><a href="{confirmationLink}">Verify Email Address</a></p>
+            <p>If you did not create an account, no further action is required.</p>
+            <p>Best regards,<br/>The Kounga ERP Team</p>
             """;
 
         await SendEmailAsync(toEmail, firstName, "Confirm your email address", html, isHtmlBody: true);
@@ -57,7 +58,9 @@ internal class EmailService(IConfiguration configuration) : IEmailService
                 builder.HtmlBody = 
                     $"""
                         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-                        {body}
+                        <div class="bg-body-tertiary p-3 rounded">
+                            {body}
+                        </div>
                     """;
                 message.Body = builder.ToMessageBody();
             } else

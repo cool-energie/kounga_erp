@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 
 namespace kounga_erp.api.Infrastructure.Data;
-internal class ApplicationDbContext : IdentityDbContext<User, Role, long>, IApplicationDbContext
+public class ApplicationDbContext : IdentityDbContext<User, Role, long>, IApplicationDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -24,7 +24,10 @@ internal class ApplicationDbContext : IdentityDbContext<User, Role, long>, IAppl
         builder.Entity<IdentityUserLogin<long>>(entity => entity.ToTable("UserLogins"));
         builder.Entity<IdentityUserToken<long>>(entity => entity.ToTable("UserTokens"));
         builder.Entity<IdentityRoleClaim<long>>(entity => entity.ToTable("RoleClaims"));
+        // Configure claimtype view
+        builder.Entity<ClaimType>(entity => entity.HasNoKey().ToView("ClaimsTypesView"));
     }
 
     public DbSet<Address> Addresses { get; set; }
+    public DbSet<User> users { get; set; }
 }

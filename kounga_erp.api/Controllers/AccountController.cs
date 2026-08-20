@@ -1,16 +1,10 @@
-﻿using kounga_erp.api.Application.Services;
-using kounga_erp.api.DTO;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
-namespace kounga_erp.api.Controllers;
+﻿namespace kounga_erp.api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class AccountController(IAccountService accountService) : ControllerBase
+public class AccountController(IAccountService accountService, SignInManager<User> signInManager) : ControllerBase
 {
-   /* [HttpPost("logout")]
+    [HttpPost("logout")]
     public async Task<IResult> logout([FromBody] object empty) 
     {
         if (empty != null)
@@ -19,11 +13,12 @@ public class AccountController(IAccountService accountService) : ControllerBase
             return Results.Ok();
         }
         return Results.Unauthorized();
-    }*/
+    }
 
     [HttpPost("register")]
-    public async Task<IResult> Register(RegisterUserDto dto)
+    public async Task<IResult> Register(IValidator<RegisterUserDTO> validator, [FromBody] RegisterUserDTO dto)
     {
+        await validator.ValidateAndThrowAsync(dto);
         // Implementation for user registration
         var result = await accountService.RegisterUserAsync(
             dto.email,
@@ -39,6 +34,26 @@ public class AccountController(IAccountService accountService) : ControllerBase
             return Results.Ok();
         }
 
-        return Results.BadRequest();
+        return Results.InternalServerError();
+    }
+
+    [HttpPost("confirm-email")]
+    public async Task<IResult> ConfirmEmail(IValidator<ConfirmEmailDTO> validator, [FromBody] ConfirmEmailDTO dto)
+    {
+        await validator.ValidateAndThrowAsync(dto);
+        var result = await accountService.ConfirmEmailAsync(dto.userId, dto.token);
+        if (result.Succeeded)
+        {
+            return Results.Ok();
+        }
+        return Results.BadRequest(result.Errors);
+    }
+
+    [HttpPost("resend-confirm-email")]
+    public async Task<IResult> SendConfirmEmail(IValidator<SendConfirmEmailDTO> validator, [FromBody] SendConfirmEmailDTO dto)
+    {
+        await validator.ValidateAndThrowAsync(dto);
+        await accountService.sendConfirmEmailAsync(dto.email);
+        return Results.Ok();
     }
 }

@@ -1,17 +1,13 @@
-import { defineMutation, useMutation } from '@pinia/colada'
 import { accountApi } from '../accountApi'
 import { setBearerToken } from '@/helpers/functions'
+import { ref } from 'vue'
+import { LoginModel } from '../viewModels/LoginModel'
+import { useBaseMutation } from '@/composables/mutation'
 
-export const useLogin = defineMutation(() => {
-  const { mutate, ...mutation } = useMutation<void, { email: string; password: string }>({
-    mutation: async ({ email, password }) => {
-      const data = await accountApi.login(email, password)
-      setBearerToken(data.accessToken, data.refreshToken)
-    },
-  })
+const model = ref(new LoginModel())
+const proc: () => Promise<void> = async () => {
+  const data = await accountApi.login(model.value.values)
+  setBearerToken(data)
+}
 
-  return {
-    ...mutation,
-    login: mutate,
-  }
-})
+export const useLogin = useBaseMutation(model, proc)

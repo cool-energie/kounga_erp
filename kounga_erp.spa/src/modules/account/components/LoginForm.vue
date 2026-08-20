@@ -1,35 +1,27 @@
 <script setup>
-import { computed, useTemplateRef, watch, ref } from 'vue'
 import { useLogin } from '../mutations/login'
 
-const email = ref('')
-const password = ref('')
-const { login, state, asyncStatus } = useLogin()
-const loading = computed(() => asyncStatus == 'loading')
-const hasErrors = computed(() => state.value.status == 'error')
-const validator = {
-    email: [(v) => !!v || "L' adresse mail est requis."],
-    password: [(v) => !!v || 'Le mot de passe est requis.'],
-}
+const visible = ref(false)
 
-const form = useTemplateRef('form')
+const emit = defineEmits(['success']);
 
-async function process() {
-    await form.value.validate()
-    if (!form.value.isValid) return
-    login({ email: email.value, password: password.value })
-}
-
-watch(state, (value) => emit(value.status))
+const { process, model, loading } = useFormProcessing(useTemplateRef('form'), useLogin(), emit);
 </script>
 
 <template>
     <v-form ref="form">
-        <v-text-field label="Adresse mail" v-model="email" :rules="validator.email"></v-text-field>
-        <v-text-field label="Mot de passe" v-model="password" :rules="validator.password"></v-text-field>
-        <v-btn @click="process" :loading="loading">Connection</v-btn>
-        <v-alert v-if="hasErrors" density="compact"
-            text="Une erreur est survenue veuillez verifiez les informations saisies." type="error"
-            class="mt-5"></v-alert>
+        <v-text-field label="Adresse mail" prepend-inner-icon="mdi-email-outline" v-model="model.Email.value"
+            :rules="model.Email.rules"></v-text-field>
+        <v-text-field label="Mot de passe" prepend-inner-icon="mdi-lock-outline"
+            :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'" v-model="model.Password.value"
+            :rules="model.Password.rules" :type="visible ? 'text' : 'password'"
+            @click:append-inner="visible = !visible"></v-text-field>
+        <v-btn @click="process" :loading="loading" block>Connection</v-btn>
+        <div class="d-flex ga-1 mt-2 text-label-medium"><span>You don't have an account yet? </span><router-link
+                :to="{ name: 'account.register' }">Register</router-link></div>
+        <div class="d-flex ga-1 mt-2 text-label-medium"><span>Have you forgotten your password? </span><router-link
+                :to="{ name: 'account.password-reset-request' }">Forgotten password</router-link></div>
+        <div class="d-flex ga-1 mt-2 text-label-medium"><span>Your email address is not verified? </span><router-link
+                :to="{ name: 'account.resend-confirm-email' }">resend the confirmation link</router-link></div>
     </v-form>
 </template>

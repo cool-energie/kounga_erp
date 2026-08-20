@@ -8,3 +8,5 @@ public class Entity<T> : IEntity<T>
     public DateTime? LastModified { get; set; }
     public string? LastModifiedBy { get; set; }
 }
+
+public class Entity : Entity<long> { }

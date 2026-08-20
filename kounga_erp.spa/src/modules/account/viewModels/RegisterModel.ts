@@ -29,22 +29,32 @@ export class RegisterModelValues implements ViewModelValues {
 }
 
 export class RegisterModel implements ViewModel {
-  FirstName: Field = { value: '', rules: [(v: unknown) => !!v || 'First name is required'] }
-  LastName: Field = { value: '', rules: [] }
-  Email: Field = {
-    value: '',
-    rules: [
-      (v: unknown) => !!v || 'Email is required',
-      (v: unknown) => isValidEmail(String(v)) || 'Invalid email format',
-    ],
+  FirstName: Field
+  LastName: Field
+  Email: Field
+  PhoneNumber: Field
+  Password: Field
+  ConfirmPassword: Field
+  DateOfBirth: Field
+
+  constructor() {
+    this.FirstName = { value: '', rules: [(v: unknown) => !!v || 'First name is required'] }
+    this.LastName = { value: '', rules: [] }
+    this.Email = {
+      value: '',
+      rules: [
+        (v: unknown) => !!v || 'Email is required',
+        (v: unknown) => isValidEmail(String(v)) || 'Invalid email format',
+      ],
+    }
+    this.PhoneNumber = { value: '', rules: [] }
+    this.Password = { value: '', rules: [(v: unknown) => !!v || 'Password is required'] }
+    this.ConfirmPassword = {
+      value: '',
+      rules: [(v: unknown) => v == this.Password.value || 'Passwords do not match'],
+    }
+    this.DateOfBirth = { value: '', rules: [(v: unknown) => !!v || 'Date of birth is required'] }
   }
-  PhoneNumber: Field = { value: '', rules: [] }
-  Password: Field = { value: '', rules: [(v: unknown) => !!v || 'Password is required'] }
-  ConfirmPassword: Field = {
-    value: '',
-    rules: [(v: unknown) => v == this.Password.value || 'Passwords do not match'],
-  }
-  DateOfBirth: Field = { value: '', rules: [(v: unknown) => !!v || 'Date of birth is required'] }
 
   get values(): RegisterModelValues {
     return RegisterModelValues.create({
