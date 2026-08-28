@@ -16,12 +16,12 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomePage,
-      beforeEnter(to, from, next) {
+      /*beforeEnter(to, from, next) {
         if (!isConnected()) {
           next({ name: 'account.login' })
         }
         next()
-      },
+      },*/
     },
     ...settingsRoutes,
     ...securityRoutes,

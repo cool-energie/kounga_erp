@@ -3,8 +3,8 @@
 [Injectable]
 public class UserService(IUserRepository repository) : IUserService
 {
-    public async Task<PagedDataResult<User>> GetPage(IPagedDataRequest request)
+    public async Task<PagedDataResponse<User>> GetPage(PagedDataQuery query)
     {
-        return await repository.GetPage(request);
+        return await repository.GetPage(query, true, true);
     }
 }

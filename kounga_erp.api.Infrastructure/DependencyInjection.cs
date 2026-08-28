@@ -20,26 +20,26 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("Database");
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
-        services.AddIdentityApiEndpoints<User>()
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddDefaultTokenProviders();
 
-        services.AddAuthorization();
+        services.Configure<DataProtectionTokenProviderOptions>(options =>
+        {
+            options.TokenLifespan = TimeSpan.FromMinutes(30);
+        });
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
             {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidIssuer = configuration["JWT:Issuer"],
-                    ValidateAudience = true,
-                    ValidAudience = configuration["JWT:Audience"],
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SigningKey"]!))
-                };
-            });
+                ValidateIssuer = true,
+                ValidIssuer = configuration["JWT:Issuer"],
+                ValidateAudience = true,
+                ValidAudience = configuration["JWT:Audience"],
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SigningKey"]!))
+            };
+        });
 
         services.Configure<IdentityOptions>(options =>
         {
@@ -47,10 +47,10 @@ public static class DependencyInjection
             options.SignIn.RequireConfirmedEmail = true;
         });
 
-        services.Configure<DataProtectionTokenProviderOptions>(options =>
-        {
-            options.TokenLifespan = TimeSpan.FromMinutes(30);
-        });
+        services.AddIdentityApiEndpoints<User>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
 
         //services.AddIdentityApiEndpoints<User>();
         //services.AddScoped<ApplicationDbContext>();
@@ -61,8 +61,8 @@ public static class DependencyInjection
     public static WebApplication UseInfrastructureServices(this WebApplication app)
     {
         app.MapIdentityApi<User>();
-        /*app.UseAuthentication();
-        app.UseAuthorization();*/
+        app.UseAuthentication();
+        app.UseAuthorization();
         return app;
     }
 }

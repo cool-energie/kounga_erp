@@ -13,6 +13,7 @@ import './assets/css/main.scss'
 import { useRootStore } from './stores/rootStore.ts'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
+//axios.defaults.withCredentials = true
 
 axios.interceptors.request.use(
   (config) => {
@@ -64,6 +65,7 @@ axios.interceptors.response.use(
         console.error('No refresh token available. Redirecting to login.')
         window.location.href = '/account/login' // Adjust the path as needed
       }
+      window.location.href = '/account/login' // Adjust the path as needed
     }
     return Promise.reject(error)
   },

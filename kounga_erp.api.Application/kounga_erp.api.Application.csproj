@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\kounga_erp.api.BuildingBlocks\kounga_erp.api.BuildingBlocks.csproj" />
     <ProjectReference Include="..\kounga_erp.api.Domain\kounga_erp.api.Domain.csproj" />
   </ItemGroup>
 

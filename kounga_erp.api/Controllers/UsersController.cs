@@ -1,12 +1,16 @@
-﻿namespace kounga_erp.api.Controllers;
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace kounga_erp.api.Controllers;
+
 
 [Route("[controller]")]
 [ApiController]
-public class UsersController(IUserService userService) : ControllerBase
+public class UsersController(IUserService userService, PagedDataQueryValidator queryValidator) : ControllerBase
 {
     [HttpGet("page")]
-    public async Task<PagedDataResult<User>> getPage([FromQuery] PagedDataRequestDTO dto)
+    public async Task<PagedDataResponse<User>> getPage([FromQuery] PagedDataQuery query)
     {
-        return await userService.GetPage(dto);
+        await queryValidator.ValidateAndThrowAsync(query);
+        return await userService.GetPage(query);
     }
 }
