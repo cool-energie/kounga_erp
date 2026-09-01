@@ -1,4 +1,4 @@
-﻿using kounga_erp.api.Exceptions;
+﻿using kounga_erp.api.Exceptions.Handlers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;

@@ -5,3 +5,4 @@ global using Microsoft.AspNetCore.Mvc;
 global using FluentValidation;
 global using kounga_erp.api.DTO;
 global using Microsoft.AspNetCore.Identity;
+global using kounga_erp.api.BuildingBlocks.Exceptions;

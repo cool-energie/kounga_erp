@@ -1,9 +1,6 @@
-﻿using FluentValidation;
-using kounga_erp.api.BuildingBlocks.Exceptions;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Diagnostics;
 
-namespace kounga_erp.api.Exceptions;
+namespace kounga_erp.api.Exceptions.Handlers;
 
 public class CustomExceptionHandler(IProblemDetailsService problemDetailsService, ILogger<CustomExceptionHandler> logger)
         : IExceptionHandler

@@ -7,6 +7,8 @@ export function useFormProcessing(
   emit: any,
 ) {
   const validateForm = async () => {
+    console.log('form')
+    console.log(form.value)
     if (!form.value) return false
     await form.value.validate()
     return form.value.isValid
@@ -27,5 +29,5 @@ export function useFormProcessing(
     }
   })
 
-  return { process, model: mutation.model, loading, hasErrors }
+  return { process, model: mutation.model, loading, hasErrors, status: mutation.status }
 }

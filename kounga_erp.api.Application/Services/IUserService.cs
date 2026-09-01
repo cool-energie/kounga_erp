@@ -3,4 +3,5 @@
 public interface IUserService
 {
     Task<PagedDataResponse<User>> GetPage(PagedDataQuery request);
+    Task Edit(User user, string password);
 }
