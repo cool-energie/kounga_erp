@@ -7,8 +7,6 @@ export function useFormProcessing(
   emit: any,
 ) {
   const validateForm = async () => {
-    console.log('form')
-    console.log(form.value)
     if (!form.value) return false
     await form.value.validate()
     return form.value.isValid

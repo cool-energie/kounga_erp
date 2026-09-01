@@ -1,20 +1,6 @@
 import type { Field } from '@/types/view/Field'
-import type { ViewModel, ViewModelValues } from '@/types/view/ViewModel'
+import { ViewModelBase } from '@/types/view/ViewModel'
 
-export class ResendConfirmEmailModelValues implements ViewModelValues {
-  Email: string
-
-  constructor() {
-    this.Email = ''
-  }
-}
-
-export class ResendConfirmEmailModel implements ViewModel {
+export class ResendConfirmEmailModel extends ViewModelBase {
   Email: Field = { value: '', rules: [(v: unknown) => !!v || 'Email is required'] }
-
-  get values(): ResendConfirmEmailModelValues {
-    return {
-      Email: this.Email.value,
-    }
-  }
 }

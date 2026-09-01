@@ -51,18 +51,12 @@ public static class DependencyInjection
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-
-        //services.AddIdentityApiEndpoints<User>();
-        //services.AddScoped<ApplicationDbContext>();
         services.AddScoped<IUserRepository, UserRepository>();
         return services;
     }
 
     public static WebApplication UseInfrastructureServices(this WebApplication app)
-    {
-        app.MapIdentityApi<User>();
-        app.UseAuthentication();
-        app.UseAuthorization();
+    {        
         return app;
     }
 }

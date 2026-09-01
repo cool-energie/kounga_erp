@@ -1,44 +1,16 @@
 import { isValidEmail } from '@/helpers/utils'
-import { Filter, type FilterDataType } from '@/types/data/Filter'
-import type { FiltersModel, ViewModelValues } from '@/types/view/ViewModel'
+import { Filter } from '@/types/data/Filter'
+import { FiltersModel } from '@/types/view/ViewModel'
 
-export class UsersFiltersModelValues implements ViewModelValues {
-  FirstName: FilterDataType | undefined
-  LastName: FilterDataType | undefined
-  UserName: FilterDataType | undefined
-  CreatedAt: FilterDataType | undefined
-
-  constructor() {
-    this.FirstName = undefined
-    this.LastName = undefined
-    this.UserName = undefined
-    this.CreatedAt = undefined
-  }
-}
-
-export class UsersFiltersModel implements FiltersModel {
+export class UsersFiltersModel extends FiltersModel {
   FirstName: Filter
   LastName: Filter
   UserName: Filter
   CreatedAt: Filter
 
   constructor() {
+    super()
     this.init()
-  }
-
-  // CreatedAt: Field = { value: '', rules: }
-
-  get values(): UsersFiltersModelValues {
-    return {
-      FirstName: this.FirstName.value,
-      LastName: this.LastName.value,
-      UserName: this.UserName.value,
-      CreatedAt: this.CreatedAt.value,
-    }
-  }
-
-  get filters(): Array<Filter> {
-    return [this.FirstName, this.LastName, this.UserName, this.CreatedAt]
   }
 
   init() {

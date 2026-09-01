@@ -1,5 +1,4 @@
 import axios from 'axios'
-import type { RegisterModelValues } from './viewModels/RegisterModel'
 import type { LoginModelValues } from './viewModels/LoginModel'
 import type { ResetPasswordRequestModelValues } from './viewModels/ResetPasswordRequestModel'
 import type { PasswordResetModelValues } from './viewModels/PasswordResetModel'
@@ -41,7 +40,7 @@ export const accountApi = {
       })
     return data
   },
-  async register(model: RegisterModelValues) {
+  async register(model) {
     return await axios.post(endpoints.register, model).catch(() => {
       throw new ErrorException()
     })

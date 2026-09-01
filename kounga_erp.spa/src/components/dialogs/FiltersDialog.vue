@@ -20,12 +20,14 @@ function hide() {
 </script>
 
 <template>
-    <tiped-icon-btn color="primary-darken-1" icon="mdi-filter-plus" tip="Add filters" @click="model = true" />
-    <v-chip-group>
-        <v-chip v-for="f in filters" @click:close="$emit('remove:filter', f)" closable variant="elevated">{{
-            toFilterLabel(f)
-        }}</v-chip>
-    </v-chip-group>
+    <div>
+        <tiped-icon-btn color="primary-darken-1" icon="mdi-filter-plus" tip="Add filters" @click="model = true" />
+        <v-chip-group>
+            <v-chip v-for="f in filters" @click:close="$emit('remove:filter', f)" closable variant="elevated">{{
+                toFilterLabel(f)
+            }}</v-chip>
+        </v-chip-group>
+    </div>
     <v-dialog max-width="800" v-model="model" persistent absolute>
         <v-card title="Add/Modify Filters">
             <v-card-text>

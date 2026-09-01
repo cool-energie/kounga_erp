@@ -1,5 +1,5 @@
 <script setup>
-import { useRegister } from '../mutations/register'
+import { useRegister } from '@/modules/account/mutations/register';
 
 const emit = defineEmits(['success']);
 

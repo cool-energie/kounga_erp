@@ -1,7 +1,10 @@
-﻿namespace kounga_erp.api.Controllers;
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace kounga_erp.api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[AllowAnonymous]
 public class AccountController(IAccountService accountService, SignInManager<User> signInManager) : ControllerBase
 {
     [HttpPost("logout")]
