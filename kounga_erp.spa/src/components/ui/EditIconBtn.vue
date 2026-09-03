@@ -1,6 +1,7 @@
 <script setup>
+import TipedIconBtn from '@/components/ui/TipedIconBtn.vue';
 </script>
 
 <template>
-    <v-btn variant="text" icon @click="$emit('click')"><v-icon>mdi-pencil</v-icon></v-btn>
+    <tiped-icon-btn color="primary-darken-1" icon="mdi-pencil" tip="Edit" @click="$emit('click')" />
 </template>

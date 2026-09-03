@@ -1,8 +1,8 @@
 import { isValidEmail } from '@/helpers/utils'
 import type { Field } from '@/types/view/Field'
-import { EntityViewModelBase } from '@/types/view/ViewModel'
+import { ViewModelBase } from '@/types/view/ViewModel'
 
-export class RegisterModel extends EntityViewModelBase {
+export class RegisterModel extends ViewModelBase {
   FirstName: Field = { value: '', rules: [(v: unknown) => !!v || 'First name is required'] }
   LastName: Field = { value: '', rules: [] }
   Email: Field = {

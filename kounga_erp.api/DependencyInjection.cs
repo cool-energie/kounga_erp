@@ -30,11 +30,11 @@ public static class DependencyInjection
     public static WebApplication UseApiServices(this WebApplication app)
     {
         app.UseRouting();
+        app.UseCors(MyAllowSpecificOrigins);
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapIdentityApi<User>();
         app.MapControllers().RequireAuthorization();
-        app.UseCors(MyAllowSpecificOrigins);
         app.UseHsts();
         app.UseHttpsRedirection();
         app.UseExceptionHandler(options => { });

@@ -42,6 +42,8 @@ axios.interceptors.response.use(
       error.response.status === 401
     ) {
       const refreshToken = localStorage.getItem('refreshToken')
+      console.log('refreshToken')
+      console.log(refreshToken)
       if (refreshToken) {
         try {
           localStorage.removeItem('refreshToken')

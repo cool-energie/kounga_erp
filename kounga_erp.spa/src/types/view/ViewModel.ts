@@ -4,22 +4,20 @@ export interface ViewModel {
   get values(): any
 }
 
-export interface EntityViewModel extends ViewModel {
-  setValues(values: any): void
-}
-
 export class ViewModelBase implements ViewModel {
   get values() {
     return Object.fromEntries(Object.entries(this).map(([k, v]) => [k, v.value]))
   }
 }
 
-export class EntityViewModelBase extends ViewModelBase implements EntityViewModel {
-  setValues(values: any) {
-    Object.entries(values).forEach(([k, v]) => {
-      this[k].value = v
-    })
-  }
+export function setModelvalues(model: ViewModel, values: any) {
+  //console.log('setModelvalues', model, values)
+  Object.entries(values).forEach(([k, v]) => {
+    if (k in model) {
+      model[k].value = values[k]
+    }
+  })
+  //console.log('setModelvalues end', model, values)
 }
 
 //export type FiltersModel = ViewModelBase & { filters: Array<Filter>; init: Function }

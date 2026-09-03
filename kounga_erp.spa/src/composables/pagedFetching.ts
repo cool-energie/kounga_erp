@@ -15,7 +15,7 @@ export default function usePagedFetching(key, filtersStore, loader) {
   const filters = computed(() => filtersStore.filters.filter((f) => !isFilterEmpty(f)))
   const params = ref({ page: 1, itemsPerPage: 15, sorts: [], filters: filters })
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refresh, refetch } = useQuery({
     key: () => [
       key,
       'page',
@@ -32,5 +32,7 @@ export default function usePagedFetching(key, filtersStore, loader) {
     data,
     isLoading,
     params,
+    refresh,
+    refetch,
   }
 }

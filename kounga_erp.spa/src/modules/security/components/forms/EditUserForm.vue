@@ -3,8 +3,8 @@ import { UserModel } from '@/modules/security/viewModels/UserModel';
 import { useTemplateRef } from 'vue';
 
 const props = defineProps({
-    model: {
-        type: UserModel,
+    edit: {
+        type: Boolean,
         required: true
     },
     loading: {
@@ -13,6 +13,7 @@ const props = defineProps({
     }
 })
 
+const model = defineModel({ type: UserModel, default: () => new UserModel() })
 const ref = useTemplateRef('form')
 
 defineExpose({
@@ -29,10 +30,12 @@ defineExpose({
         <v-text-field label="Email" v-model="model.email.value" :rules="model.email.rules" required></v-text-field>
         <v-text-field label="Phone Number" v-model="model.phoneNumber.value" :rules="model.phoneNumber.rules"
             required></v-text-field>
-        <v-text-field label="Password" v-model="model.password.value" :rules="model.password.rules" type="password"
-            required></v-text-field>
-        <v-text-field label="Confirm Password" v-model="model.confirmPassword.value"
-            :rules="model.confirmPassword.rules" type="password" required></v-text-field>
+        <template v-if="!edit">
+            <v-text-field label="Password" v-model="model.password.value" :rules="model.password.rules" type="password"
+                required></v-text-field>
+            <v-text-field label="Confirm Password" v-model="model.confirmPassword.value"
+                :rules="model.confirmPassword.rules" type="password" required></v-text-field>
+        </template>
         <v-date-input v-model="model.dateOfBirth.value" :rules="model.dateOfBirth.rules"
             label="Date of Birth"></v-date-input>
         <v-checkbox v-model="model.isActive.value" :rules="model.isActive.rules" label="Active ?" />

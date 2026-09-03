@@ -12,16 +12,34 @@ public class UsersController(IUserService userService) : ControllerBase
         return await userService.GetPage(query);
     }
 
-    [HttpPost("edit")]
+    [HttpPatch]
     public async Task edit(IValidator<EditUserDTO> validator, [FromBody] EditUserDTO dto)
     {
         await validator.ValidateAndThrowAsync(dto);
-        User user = new User{ FirstName = dto.firstName, LastName = dto.lastName, Email = dto.email, UserName = dto.email, PhoneNumber = dto.phoneNumber, DateOfBirth = DateTime.Parse(dto.dateOfBirth), IsActive = dto.isActive };
-        if (dto.id != null)
-        {
-            user.Id = (long) dto.id;
-        }
+        //User user = new User{ FirstName = dto.firstName, LastName = dto.lastName, Email = dto.email, UserName = dto.email, PhoneNumber = dto.phoneNumber, DateOfBirth = DateTime.Parse(dto.dateOfBirth), IsActive = dto.isActive };
+        await userService.Edit<EditUserDTO>(dto.Id, dto);
+    }
 
-        await userService.Edit(user, dto.password);
+
+    [HttpPost("create")]
+    public async Task create(IValidator<CreateUserDTO> validator, [FromBody] CreateUserDTO dto)
+    {
+        await validator.ValidateAndThrowAsync(dto);
+        await userService.Create<CreateUserDTO>(dto, dto.Password);
+    }
+
+    [HttpPost("change-password")]
+    public async Task changePassword(IValidator<ChangePasswordDTO> validator, [FromBody] ChangePasswordDTO dto)
+    {
+        await validator.ValidateAndThrowAsync(dto);
+        await userService.ChangePassword(dto.userId, dto.newPassword);
+    }
+
+    [HttpDelete("{userId}")]
+    public async Task delete(IValidator<DeleteUserDTO> validator, [FromRoute] long userId)
+    {
+        var dto = new DeleteUserDTO(userId);
+        await validator.ValidateAndThrowAsync(dto);
+        await userService.Delete(userId);
     }
 }

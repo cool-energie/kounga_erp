@@ -1,6 +1,4 @@
-﻿using kounga_erp.api.Application.Abstracts;
-using kounga_erp.api.Application.Services;
-using kounga_erp.api.Application.Services.Impl;
+﻿using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +16,10 @@ public static class DependencyInjection
 
         services.AddSingleton<IEmailSender, EmailService>();
         //services.AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider);
+        services.Configure<JsonOptions>(options =>
+        {
+            options.SerializerOptions.Converters.Add(new CustomDateTimeConverter());
+        });
 
         return services;
     }   

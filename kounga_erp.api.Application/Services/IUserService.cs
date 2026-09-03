@@ -3,5 +3,8 @@
 public interface IUserService
 {
     Task<PagedDataResponse<User>> GetPage(PagedDataQuery request);
-    Task Edit(User user, string password);
+    Task Create<T>(T user, string password);
+    Task Edit<T>(long userId, T patch);
+    Task ChangePassword(long userId, string newPassword);
+    Task Delete(long userId);
 }

@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import TipedIconBtn from './TipedIconBtn.vue';
+import TipedIconBtn from '@/components/ui/TipedIconBtn.vue';
 import { isFilterEmpty, toFilterLabel } from '@/types/data/Filter.ts'
 
 const props = defineProps(['store'])

@@ -3,12 +3,12 @@ import { stringifyFilters, type Filter } from '@/types/data/Filter'
 import { stringifySorts, type Sort } from '@/types/data/Sort'
 import { ErrorException } from '@/types/Exception'
 import axios from 'axios'
-import type { EditUserModelValues } from '@/modules/security/viewModels/UserModel'
 
 const endpoints = {
   getPage: (page: number, itemsPerPage: number, sorts: Array<Sort>, filters: Array<Filter>) =>
     `users/page?page=${page}&itemsPerPage=${itemsPerPage}&sorts=${stringifySorts(sorts)}&filters=${stringifyFilters(filters)}`,
-  edit: 'users/edit',
+  edit: 'users',
+  delete: (id: Number | undefined) => `users/${id}`,
 }
 
 export const usersApi = {
@@ -18,8 +18,13 @@ export const usersApi = {
     )
     return data
   },
-  async edit(model: EditUserModelValues) {
-    return await axios.post(endpoints.edit, model).catch(() => {
+  async edit(model) {
+    return await axios.patch(endpoints.edit, model).catch(() => {
+      throw new ErrorException()
+    })
+  },
+  async delete(id: Number | undefined) {
+    return await axios.delete(endpoints.delete(id)).catch(() => {
       throw new ErrorException()
     })
   },
