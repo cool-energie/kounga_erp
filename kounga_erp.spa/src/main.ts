@@ -54,6 +54,8 @@ axios.interceptors.response.use(
           originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
           return axios(originalRequest)
         } catch (exception) {
+          console.error('Failed to refresh token. Redirecting to login.')
+          console.error(exception)
           // If refreshing fails, redirect to login or handle accordingly
           //console.error('Failed to refresh token. Redirecting to login.')
           // Optionally, you can clear tokens and redirect to login page

@@ -1,11 +1,6 @@
-﻿using kounga_erp.api.Application.Abstracts;
-using kounga_erp.api.BuildingBlocks.Helpers;
-using kounga_erp.api.Domain.Models;
-using kounga_erp.api.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
+﻿namespace kounga_erp.api.Infrastructure.Repositories;
 
-namespace kounga_erp.api.Infrastructure.Repositories;
-
+[Injectable]
 public class UserRepository : Repository<User>, IUserRepository
 {
     public UserRepository(ApplicationDbContext dbContext) : base(dbContext)

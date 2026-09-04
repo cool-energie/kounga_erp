@@ -1,6 +1,6 @@
 ﻿namespace kounga_erp.api.DTO;
 
-public record CreateUserDTO(long? Id, string Email, string Password, string FirstName, string LastName, string DateOfBirth, string PhoneNumber, Boolean IsActive);
+public record CreateUserDTO(string Email, string Password, string FirstName, string LastName, DateTime DateOfBirth, string PhoneNumber, Boolean IsActive);
 
 public class CreateUserDTOValidator : AbstractValidator<CreateUserDTO>
 {

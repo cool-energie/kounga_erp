@@ -1,11 +1,7 @@
-﻿using kounga_erp.api.Application.Abstracts;
-using kounga_erp.api.Domain.Models;
-using kounga_erp.api.Infrastructure.Data;
-using kounga_erp.api.Infrastructure.Repositories;
+﻿using kounga_erp.api.Application.Services.Impl;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +17,12 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString("Database");
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
+      //  services.AddAuthorization();
+
+        /*services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddRoles<Role>();
+        */
         services.Configure<DataProtectionTokenProviderOptions>(options =>
         {
             options.TokenLifespan = TimeSpan.FromMinutes(30);
@@ -48,16 +50,21 @@ public static class DependencyInjection
         });
 
         services.AddIdentityApiEndpoints<User>()
+            .AddRoles<Role>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.Scan(scan => scan
+            .FromAssemblyOf<UserRepository>()
+            .AddClasses(c => c.WithAttribute<InjectableAttribute>())
+            .AsImplementedInterfaces()
+            .WithScopedLifetime());
+//        services.AddScoped<IUserRepository, UserRepository>();
         return services;
     }
 
     public static WebApplication UseInfrastructureServices(this WebApplication app)
-    {        
+    {
         return app;
     }
 }
-

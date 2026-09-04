@@ -46,7 +46,15 @@ export const accountApi = {
     })
   },
   async refresh(refreshToken: string) {
-    const payload = await axios.post(endpoints.refresh, { refreshToken })
+    const payload = await axios.post(
+      endpoints.refresh,
+      { refreshToken },
+      {
+        headers: {
+          Authorization: undefined,
+        },
+      },
+    )
     return payload.data
   },
   async logout() {

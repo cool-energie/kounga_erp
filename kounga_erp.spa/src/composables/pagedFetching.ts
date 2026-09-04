@@ -11,7 +11,7 @@ export type PagedDataParams = {
 }
 export type PagedDataResponse<T> = { Items: Array<T>; Total: number }
 
-export default function usePagedFetching(key, filtersStore, loader) {
+export function usePagedFetching(key, filtersStore, loader) {
   const filters = computed(() => filtersStore.filters.filter((f) => !isFilterEmpty(f)))
   const params = ref({ page: 1, itemsPerPage: 15, sorts: [], filters: filters })
 

@@ -5,7 +5,6 @@ import { formatDateStr } from "@/helpers/utils";
 import FiltersDialog from "@/components/dialogs/FiltersDialog.vue";
 import { useUsersFiltersStore } from "@/modules/security/stores/usersFiltersStore";
 import UsersFiltersForm from "@/modules/security/components/forms/UsersFiltersForm.vue";
-import usePagedFetching from '@/composables/pagedFetching';
 import EditIconBtn from "@/components/ui/EditIconBtn.vue";
 import DeleteIconBtn from "@/components/ui/DeleteIconBtn.vue";
 import BooleanIcon from "@/components/ui/BooleanIcon.vue";
@@ -52,7 +51,6 @@ function showCreateDialog() {
 function handleSuccess() {
     dialogs.value.editUser = false
     selectedUser.value = null
-    editMode.value = false
     refetch()
 }
 

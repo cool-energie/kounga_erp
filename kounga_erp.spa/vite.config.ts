@@ -14,6 +14,7 @@ export default defineConfig({
         'vue',
         {
           '@/composables/formProcessing': ['useFormProcessing'],
+          '@/composables/pagedFetching': ['usePagedFetching'],
         },
       ],
     }),

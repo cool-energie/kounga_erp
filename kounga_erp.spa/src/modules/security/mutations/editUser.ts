@@ -6,7 +6,11 @@ import { usersApi } from '@/modules/security/api/usersApi'
 const model = ref(new UserModel())
 
 const proc: () => Promise<void> = async () => {
-  await usersApi.edit(model.value.values)
+  if (model.value.values.id === undefined) {
+    await usersApi.create(model.value.values)
+  } else {
+    await usersApi.edit(model.value.values)
+  }
 }
 
 export const useEditUser = useBaseMutation(model, proc)

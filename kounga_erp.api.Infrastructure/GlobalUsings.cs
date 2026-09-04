@@ -1,3 +1,9 @@
 ﻿global using kounga_erp.api.Application.Abstractions;
 global using kounga_erp.api.BuildingBlocks.Models;
 global using kounga_erp.api.Infrastructure.Data;
+global using kounga_erp.api.Application.Abstracts;
+global using kounga_erp.api.Application.Services;
+global using kounga_erp.api.BuildingBlocks.Abstracts;
+global using kounga_erp.api.Domain.Models;
+global using kounga_erp.api.Infrastructure.Repositories;
+global using kounga_erp.api.BuildingBlocks.Helpers;

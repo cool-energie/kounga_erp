@@ -9,12 +9,14 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue').EffectScope
+  const ServerSideDataTable: typeof import('@/components/ServerSideDataTable.vue').ServerSideDataTable
   const computed: typeof import('vue').computed
   const createApp: typeof import('vue').createApp
   const customRef: typeof import('vue').customRef
   const defineAsyncComponent: typeof import('vue').defineAsyncComponent
   const defineComponent: typeof import('vue').defineComponent
   const effectScope: typeof import('vue').effectScope
+  const formatDateStr: typeof import('@/helpers/utils').formatDateStr
   const getCurrentInstance: typeof import('vue').getCurrentInstance
   const getCurrentScope: typeof import('vue').getCurrentScope
   const getCurrentWatcher: typeof import('vue').getCurrentWatcher
@@ -61,6 +63,7 @@ declare global {
   const useFormProcessing: typeof import('@/composables/formProcessing').useFormProcessing
   const useId: typeof import('vue').useId
   const useModel: typeof import('vue').useModel
+  const usePagedFetching: typeof import('@/composables/pagedFetching').usePagedFetching
   const useSlots: typeof import('vue').useSlots
   const useTemplateRef: typeof import('vue').useTemplateRef
   const watch: typeof import('vue').watch

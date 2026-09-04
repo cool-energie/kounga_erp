@@ -11,7 +11,7 @@ export class ViewModelBase implements ViewModel {
 }
 
 export function setModelvalues(model: ViewModel, values: any) {
-  //console.log('setModelvalues', model, values)
+  console.log('setModelvalues', model, values)
   Object.entries(values).forEach(([k, v]) => {
     if (k in model) {
       model[k].value = values[k]
